@@ -12,6 +12,7 @@ public class XFGame : MonoBehaviour
         Application.runInBackground = true;
 
         Instance = this;
+        GameObject.DontDestroyOnLoad(gameObject);
     }	
 
     private void Start()
