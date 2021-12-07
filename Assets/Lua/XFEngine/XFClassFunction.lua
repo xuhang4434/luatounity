@@ -271,109 +271,6 @@ function register_members(class, key, getFuncName, setFuncName)
     class.__member[key].set = setFuncName
 end
 
-
--- function class(classname, super)
---     if _G[classname] then
---         error("this aleady define"..classname)
---     end
-
---     local superType = type(super)
---     local cls = nil
-
---     if super then
---         cls = {}
---         setmetatable(cls, {__index = super})
---         cls.super = super
---     else
---         cls = {ctor = function() end}
---     end
-
---     cls.__cname = classname
---     cls.__ctype = 2 -- lua
---     cls.__member = {}
---     cls.__index = function(table, key)
-
---         local should_check, order, getFuncName = check_should_use_get(table, key)
-
---         if should_check then
-
---             -- if key == "test" then
---             local getFunc = rawget(table, getFuncName)
---             if getFunc ~= nil then
---                 return getFunc(table)
---             end
-
---             local result = getmetatable(table)
---             local index = 1
---             while result ~= nil and index <= order do
---                 local getFunc = rawget(result, getFuncName)
---                 if getFunc ~= nil then
---                     -- print("getFunc >>>>>>>>>>>>>>>>>>>>>>> ")
---                     return getFunc(table)
---                 end
---                 result = getmetatable(result)
---                 index = index + 1
---             end
---             error("not find .. Get function " .. getFuncName .. " when get " .. key)
-
---         else
-
---             local value = rawget(table, key)
---             if value ~= nil then
---                 return value
---             end
---             local result = getmetatable(table)
---             while result ~= nil do
---                 local value = rawget(result, key)
---                 if value ~= nil then
---                     return value
---                 end
---                 result = getmetatable(result)
---             end
---             return nil
-
---         end
-
---     end
---     cls.__newindex = function (table, key, value)
---         local should_check, order, setFuncName = check_should_use_set(table, key)
-
---         if should_check then
---             local setFunc = rawget(table, setFuncName)
---             if setFunc ~= nil then
---                 setFunc(table, value)
---             end
---             local result = getmetatable(table)
---             local index = 1
---             while result ~= nil and index <= order do
---                 local setFunc = rawget(result, setFuncName)
---                 if setFunc ~= nil then
---                     setFunc(table, value)
---                     return
---                 end
---                 result = getmetatable(result)
---                 index = index + 1
---             end
---             error("not find .. Set function " .. setFuncName .. " when set " .. key)
---         else
---             rawset(table, key, value)
---         end
-
---     end
-
-
---     function cls.new(...)
---         local instance = setmetatable({}, cls)
---         instance.class = cls
---         cls.ctor(instance, ...)
---         return instance
---     end
-
---     _G[classname] = cls
---     return cls
--- end
-
-
 function singleton_class(curClass)
     if curClass.Instance == nil then
         curClass.Instance = curClass.new()
@@ -381,32 +278,6 @@ function singleton_class(curClass)
     return curClass.Instance
 end
 
----- 提供假名以避免和 moonscript 发生冲突
---function quick_class(classname, super)
---    return class(classname, super)
---end
-
-
-
---[[--
-
-如果对象是指定类或其子类的实例，返回 true，否则返回 false
-
-~~~ lua
-
-local Animal = class("Animal")
-local Duck = class("Duck", Animal)
-
-print(iskindof(Duck.new(), "Animal")) -- 输出 true
-
-~~~
-
-@param mixed obj 要检查的对象
-@param string classname 类名
-
-@return boolean
-
-]]
 function iskindof(obj, classname)
     local t = type(obj)
     local mt
@@ -425,13 +296,6 @@ function iskindof(obj, classname)
 
     return false
 end
---
---function handler_noarg(obj, method)
---    return function()
---        return method(obj)
---    end
---end
---
 
 function handler_arg1(obj, method, arg1)
     return function()
