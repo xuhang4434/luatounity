@@ -1,8 +1,19 @@
 --主入口函数。从这里开始lua逻辑
 function Main()					
 	print("logic start")
+	-----先加载引擎的
+	require "XFEngine.XFClassFunction"
+	-----再加载逻辑的
+	require "XFProject.MyProject"
 
+	local Update = UpdateBeat:CreateListener(MyProject.Instance.Update, MyProject.Instance)
+	UpdateBeat:AddListener(Update)
 
+	local LateUpdate = LateUpdateBeat:CreateListener(MyProject.Instance.LateUpdate, MyProject.Instance)
+	LateUpdateBeat:AddListener(LateUpdate)
+
+	local FixedUpdate = FixedUpdateBeat:CreateListener(MyProject.Instance.FixedUpdate, MyProject.Instance)
+	FixedUpdateBeat:AddListener(FixedUpdate)
 end
 
 --场景切换通知
@@ -13,5 +24,5 @@ end
 
 function OnApplicationQuit()
 
-	
+
 end
