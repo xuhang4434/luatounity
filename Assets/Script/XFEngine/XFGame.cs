@@ -10,13 +10,30 @@ public class XFGame : MonoBehaviour
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
         Application.runInBackground = true;
-
         Instance = this;
         GameObject.DontDestroyOnLoad(gameObject);
     }	
 
     private void Start()
     {
-        
+        initSingletonManager();
+
+        startMainLogic();
     }
+
+    /// <summary>
+    /// 初始化单例管理类
+    /// </summary>
+    private void initSingletonManager()
+	{
+
+	}
+
+    /// <summary>
+    /// 开始游戏主逻辑
+    /// </summary>
+    private void startMainLogic()
+	{
+
+	}
 }
