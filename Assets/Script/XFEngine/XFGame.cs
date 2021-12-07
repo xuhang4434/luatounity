@@ -1,3 +1,4 @@
+using LuaInterface;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,15 @@ using UnityEngine;
 public class XFGame : MonoBehaviour
 {
     public static XFGame Instance = null;
+
+    //=============lua启动相关
+    protected LuaState luaState = null;
+    protected LuaLooper loop = null;
+    protected LuaFunction levelLoaded = null;
+
+    protected bool openLuaSocket = false;
+    protected bool beZbStart = false;
+    //=============lua启动相关
 
     private void Awake()
     {
@@ -17,7 +27,6 @@ public class XFGame : MonoBehaviour
     private void Start()
     {
         initSingletonManager();
-
         startMainLogic();
     }
 
@@ -34,6 +43,6 @@ public class XFGame : MonoBehaviour
     /// </summary>
     private void startMainLogic()
 	{
-
+        
 	}
 }
