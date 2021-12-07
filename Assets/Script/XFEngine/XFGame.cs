@@ -13,9 +13,6 @@ public class XFGame : MonoBehaviour
     protected LuaState luaState = null;
     protected LuaLooper loop = null;
     protected LuaFunction levelLoaded = null;
-
-    protected bool openLuaSocket = false;
-    protected bool beZbStart = false;
     //=============lua启动相关
 
     private void Awake()
@@ -24,6 +21,9 @@ public class XFGame : MonoBehaviour
         Application.runInBackground = true;
         Instance = this;
         GameObject.DontDestroyOnLoad(gameObject);
+
+        //lua启动
+        luaStart();
 
         SceneManager.sceneLoaded += onSceneLoaded;
     }
@@ -46,12 +46,8 @@ public class XFGame : MonoBehaviour
 
     private void Start()
     {
-        //lua启动
-        luaStart();
-        
         //初始化C#中的单例管理类
         initSingletonManager();
-
         //开始lua的主逻辑main函数
         startMainLogic();
     }
@@ -71,6 +67,7 @@ public class XFGame : MonoBehaviour
         luaState.OpenLibs(LuaDLL.luaopen_pb);
         luaState.OpenLibs(LuaDLL.luaopen_struct);
         luaState.OpenLibs(LuaDLL.luaopen_lpeg);
+
         if (LuaConst.openLuaSocket)
         {
             luaState.BeginPreLoad();
@@ -78,12 +75,7 @@ public class XFGame : MonoBehaviour
             luaState.RegFunction("mime.core", LuaOpen_Mime_Core);
             luaState.EndPreLoad();
         }
-        if (LuaConst.openLuaDebugger)
-        {
-            luaState.AddSearchPath(LuaConst.zbsDir);
-            luaState.LuaDoString(string.Format("DebugServerIp = '{0}'", "localhost"), "@LuaClient.cs");
-        }
-
+   
         luaState.LuaSetTop(0);
         LuaBinder.Bind(luaState);
         DelegateFactory.Init();
