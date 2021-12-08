@@ -3,6 +3,7 @@ function Main()
 	print("logic start")
 	-----先加载引擎的
 	require "XFEngine.XFClassFunction"
+	require "XFEngine.XFUIManager"
 	-----再加载逻辑的
 	require "XFProject.MyProject"
 
