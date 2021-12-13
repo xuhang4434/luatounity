@@ -1,10 +1,7 @@
 MyProject = class("MyProject")
-singleton_class(MyProject)
 
-function MyProject:ctor()
-    
-
-
+function MyProject:ctor(...)
+    print("MyProject ctor")
 end
 
 function MyProject:Update()
@@ -19,6 +16,7 @@ function MyProject:FixedUpdate()
   
 end
 
+singleton_class(MyProject)
 
 
 

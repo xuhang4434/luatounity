@@ -2,11 +2,11 @@
 function Main()					
 	print("logic start")
 	-----先加载引擎的
-	require "XFEngine.ClassFunction"
+	require "XFEngine.XFClassFunction"
 
 	-----再加载逻辑的
-	require "Project.MyProject"
-	require "Project.UIManager"
+	require "XFProject.MyProject"
+	require "XFProject.UIManager"
 
 	local Update = UpdateBeat:CreateListener(MyProject.Instance.Update, MyProject.Instance)
 	UpdateBeat:AddListener(Update)

@@ -1,0 +1,7 @@
+XFUIManager = class("XFUIManager")
+singleton_class(XFUIManager)
+
+
+function XFUIManager:ctor()
+    print("XFUIManager ctor")
+end
