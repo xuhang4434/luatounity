@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class XFGame : MonoBehaviour
+public class StartGame : MonoBehaviour
 {
-    public static XFGame Instance = null;
+    public static StartGame Instance = null;
 
     //=============lua∆Ù∂Øœ‡πÿ
     protected LuaState luaState = null;
