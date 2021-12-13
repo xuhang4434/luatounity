@@ -86,7 +86,7 @@ public class StartGame : MonoBehaviour
         loop = gameObject.AddComponent<LuaLooper>();
         loop.luaState = luaState;
 
-        luaState.DoFile("XFEngine/Main.lua");
+        luaState.DoFile("Engine/Main.lua");
         levelLoaded = luaState.GetFunction("OnLevelWasLoaded");
         LuaFunction main = luaState.GetFunction("Main");
         main.Call();

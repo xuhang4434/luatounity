@@ -2,7 +2,7 @@
 function Main()					
 	print("logic start")
 	-----先加载引擎的
-	require "XFEngine.ClassFunction"
+	require "Engine.ClassFunction"
 
 	-----再加载逻辑的
 	require "Project.MyProject"
